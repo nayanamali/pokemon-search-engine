@@ -45,7 +45,8 @@ function App() {
     <div
       style={{
         minHeight: "100vh",
-        background: "#dbeafe",
+        background:
+          "linear-gradient(to bottom right, #bfdbfe, #dbeafe)",
         padding: "40px",
         fontFamily: "Arial"
       }}
@@ -54,7 +55,9 @@ function App() {
       <h1
         style={{
           textAlign: "center",
-          marginBottom: "30px"
+          marginBottom: "30px",
+          fontSize: "42px",
+          color: "#1e3a8a"
         }}
       >
         Pokemon Pokedex
@@ -72,10 +75,25 @@ function App() {
           type="text"
           placeholder="Enter Pokemon Name"
           id="pokemonInput"
+          onKeyDown={(e) => {
+
+            if (e.key === "Enter") {
+
+              const input =
+                document.getElementById(
+                  "pokemonInput"
+                ) as HTMLInputElement;
+
+              fetchPokemon(input.value);
+            }
+          }}
           style={{
-            padding: "12px",
-            width: "300px",
-            marginBottom: "15px"
+            padding: "14px",
+            width: "320px",
+            borderRadius: "10px",
+            border: "1px solid #ccc",
+            marginBottom: "15px",
+            fontSize: "16px"
           }}
         />
 
@@ -90,18 +108,37 @@ function App() {
             fetchPokemon(input.value);
           }}
           style={{
-            padding: "10px 20px",
+            padding: "12px 24px",
             cursor: "pointer",
-            marginBottom: "20px"
+            border: "none",
+            borderRadius: "10px",
+            backgroundColor: "#2563eb",
+            color: "white",
+            fontWeight: "bold",
+            marginBottom: "25px",
+            fontSize: "16px"
           }}
         >
           Search
         </button>
 
-        {loading && <p>Loading...</p>}
+        {loading && (
+          <p
+            style={{
+              fontSize: "18px"
+            }}
+          >
+            Loading...
+          </p>
+        )}
 
         {error && (
-          <p style={{ color: "red" }}>
+          <p
+            style={{
+              color: "red",
+              fontSize: "18px"
+            }}
+          >
             {error}
           </p>
         )}
@@ -110,23 +147,35 @@ function App() {
 
           <div
             style={{
-              border: "1px solid #ccc",
-              borderRadius: "10px",
-              padding: "20px",
-              width: "350px",
-              backgroundColor: "white"
+              width: "420px",
+              borderRadius: "24px",
+              padding: "30px",
+              background:
+                "linear-gradient(to bottom right, #ffffff, #e0f2fe)",
+              boxShadow:
+                "0 10px 25px rgba(0,0,0,0.2)",
+              textAlign: "center"
             }}
           >
 
             <img
-              src={pokemon.sprites.front_default}
+              src={
+                pokemon.sprites.other[
+                  "official-artwork"
+                ].front_default
+              }
               alt={pokemon.name}
-              width="150"
+              width="220"
+              style={{
+                marginBottom: "10px"
+              }}
             />
 
             <h2
               style={{
-                textTransform: "capitalize"
+                textTransform: "capitalize",
+                fontSize: "34px",
+                color: "#1e3a8a"
               }}
             >
               {pokemon.name}
@@ -146,31 +195,119 @@ function App() {
 
             <h3>Types</h3>
 
-            <ul>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                gap: "10px",
+                marginBottom: "20px"
+              }}
+            >
 
               {pokemon.types.map((t: any) => (
 
-                <li key={t.type.name}>
+                <span
+                  key={t.type.name}
+                  style={{
+                    backgroundColor: "#2563eb",
+                    color: "white",
+                    padding: "8px 16px",
+                    borderRadius: "20px",
+                    fontWeight: "bold"
+                  }}
+                >
                   {t.type.name}
-                </li>
+                </span>
 
               ))}
 
-            </ul>
+            </div>
 
             <h3>Abilities</h3>
 
-            <ul>
+            <ul
+              style={{
+                listStyle: "none",
+                padding: 0,
+                marginBottom: "20px"
+              }}
+            >
 
               {pokemon.abilities.map((a: any) => (
 
-                <li key={a.ability.name}>
+                <li
+                  key={a.ability.name}
+                  style={{
+                    marginBottom: "6px"
+                  }}
+                >
                   {a.ability.name}
                 </li>
 
               ))}
 
             </ul>
+
+            <h3>Stats</h3>
+
+            <div>
+
+              {pokemon.stats.map((s: any) => (
+
+                <div
+                  key={s.stat.name}
+                  style={{
+                    marginBottom: "14px",
+                    textAlign: "left"
+                  }}
+                >
+
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      marginBottom: "4px"
+                    }}
+                  >
+
+                    <span
+                      style={{
+                        textTransform: "capitalize"
+                      }}
+                    >
+                      {s.stat.name}
+                    </span>
+
+                    <span>
+                      {s.base_stat}
+                    </span>
+
+                  </div>
+
+                  <div
+                    style={{
+                      backgroundColor: "#d1d5db",
+                      borderRadius: "10px",
+                      overflow: "hidden",
+                      height: "12px"
+                    }}
+                  >
+
+                    <div
+                      style={{
+                        width: `${s.base_stat}%`,
+                        backgroundColor: "#2563eb",
+                        height: "100%"
+                      }}
+                    />
+
+                  </div>
+
+                </div>
+
+              ))}
+
+            </div>
 
           </div>
 

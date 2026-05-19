@@ -133,15 +133,15 @@ http://localhost:8080/api/pokemon/pikachu
 
 ## Home Page
 
-(Add Screenshot Here)
+![Home Page](screenshots/home-page.png)
 
 ## Pokemon Search Result
 
-(Add Screenshot Here)
+![Pokemon Result](screenshots/pokemon-result.png)
 
 ## Invalid Pokemon Search
 
-(Add Screenshot Here)
+![Error Page](screenshots/error-page.png)
 
 ---
 

@@ -1,6 +1,6 @@
 # Pokemon Search Engine (Pokedex)
 
-A full-stack Pokemon Search Engine application built using Spring Boot and React TypeScript.
+A modern full-stack Pokedex application built using Spring Boot and React TypeScript.
 
 This application allows users to search Pokemon by name and view detailed Pokemon information including:
 - Official artwork
@@ -10,7 +10,7 @@ This application allows users to search Pokemon by name and view detailed Pokemo
 - Height
 - Weight
 
-The backend integrates with the PokeAPI and uses caching for improved performance.
+The backend integrates with the public PokeAPI service and uses caching for improved performance and faster repeated searches.
 
 ---
 
@@ -20,8 +20,8 @@ The backend integrates with the PokeAPI and uses caching for improved performanc
 - Java 21
 - Spring Boot
 - REST API
-- RestTemplate
 - Spring Cache
+- WebClient
 
 ## Frontend
 - React
@@ -32,6 +32,7 @@ The backend integrates with the PokeAPI and uses caching for improved performanc
 ## External API
 - PokeAPI
 - https://pokeapi.co/
+- Pokemon data fetched dynamically from the public PokeAPI service
 
 ---
 
@@ -44,6 +45,7 @@ The backend integrates with the PokeAPI and uses caching for improved performanc
 - Error handling for invalid Pokemon
 - Backend caching for faster repeated searches
 - Responsive and modern UI
+- Enter key search support
 
 ---
 
@@ -55,6 +57,11 @@ pokemon-search-engine/
 ├── backend/
 │
 ├── frontend/
+│
+├── screenshots/
+│   ├── home-page.png
+│   ├── pokemon-result.png
+│   └── error-page.png
 │
 └── README.md
 ```
@@ -147,12 +154,13 @@ http://localhost:8080/api/pokemon/pikachu
 
 # Cache Implementation
 
-The backend uses Spring Cache to store previously fetched Pokemon responses.
+The backend uses Spring Cache for caching Pokemon API responses.
 
-Benefits:
-- Faster repeated searches
+This improves:
+- Performance
+- Response speed
 - Reduced external API calls
-- Better performance
+- Better user experience
 
 ---
 
